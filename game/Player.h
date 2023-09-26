@@ -195,6 +195,7 @@ const int	ASYNC_PLAYER_TOURNEY_STATUS_BITS = idMath::BitsForInteger( PTS_NUM_STA
 class idInventory {
 public:
 	int						maxHealth;
+	int						maxFuel;
 	int						weapons;
 // RITUAL BEGIN
 // squirrel: Mode-agnostic buymenus
@@ -202,6 +203,8 @@ public:
 // RITUAL END
 	int						powerups;
 	int						armor;
+	int						chaff;
+	int						flare;
 	int						maxarmor;
 	int						ammo[ MAX_AMMO ];
 	int						clip[ MAX_WEAPONS ];
@@ -310,6 +313,8 @@ public:
 		bool		strafeLeft		:1;
 		bool		strafeRight		:1;
 		bool		attackHeld		:1;
+		bool		bankLeft        :1;
+		bool		bankRight       :1;
 		bool		weaponFired		:1;
 		bool		jump			:1;
 		bool		crouch			:1;

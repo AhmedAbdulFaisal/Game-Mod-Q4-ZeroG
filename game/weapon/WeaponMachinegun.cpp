@@ -124,12 +124,19 @@ rvWeaponMachinegun::UpdateFlashlight
 ================
 */
 bool rvWeaponMachinegun::UpdateFlashlight ( void ) {
+
+	 
+	/*
 	if ( !wsfl.flashlight ) {
 		return false;
 	}
 	
 	SetState ( "Flashlight", 0 );
-	return true;		
+	return true;	
+
+	*/
+
+	return false;
 }
 
 /*

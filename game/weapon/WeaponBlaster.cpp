@@ -71,12 +71,18 @@ rvWeaponBlaster::UpdateFlashlight
 ================
 */
 bool rvWeaponBlaster::UpdateFlashlight ( void ) {
+
+	/* 
 	if ( !wsfl.flashlight ) {
 		return false;
 	}
 	
 	SetState ( "Flashlight", 0 );
-	return true;		
+	return true;	
+
+	*/
+
+	return false;
 }
 
 /*
