@@ -6,6 +6,16 @@
 
 #define BLASTER_SPARM_CHARGEGLOW		6
 
+
+/* 
+* Freeze Blaster
+* Todo: change weapon skin to that of rifle
+* Mechanics:
+*	No flashlight
+*	Slow delay
+*	Enemies freeze instead of getting killed
+*/
+
 class rvWeaponBlaster : public rvWeapon {
 public:
 
@@ -74,9 +84,15 @@ bool rvWeaponBlaster::UpdateFlashlight ( void ) {
 rvWeaponBlaster::Flashlight
 ================
 */
+
+
+/* Flashlight disabled */
 void rvWeaponBlaster::Flashlight ( bool on ) {
+	
+	/*
 	owner->Flashlight ( on );
 	
+
 	if ( on ) {
 		worldModel->ShowSurface ( "models/weapons/blaster/flare" );
 		viewModel->ShowSurface ( "models/weapons/blaster/flare" );
@@ -84,7 +100,10 @@ void rvWeaponBlaster::Flashlight ( bool on ) {
 		worldModel->HideSurface ( "models/weapons/blaster/flare" );
 		viewModel->HideSurface ( "models/weapons/blaster/flare" );
 	}
+
+	*/
 }
+ 
 
 /*
 ================

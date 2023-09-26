@@ -4,6 +4,13 @@
 #include "../Game_local.h"
 #include "../Weapon.h"
 
+
+/*
+	Sub-Machine gun
+	Higher rate-of-fire and cone of fire, but nerfed range
+	Disable flashlight
+*/
+
 class rvWeaponMachinegun : public rvWeapon {
 public:
 
@@ -131,6 +138,8 @@ rvWeaponMachinegun::Flashlight
 ================
 */
 void rvWeaponMachinegun::Flashlight ( bool on ) {
+	/*
+	
 	owner->Flashlight ( on );
 	
 	if ( on ) {
@@ -140,6 +149,8 @@ void rvWeaponMachinegun::Flashlight ( bool on ) {
 		viewModel->HideSurface ( "models/weapons/blaster/flare" );
 		worldModel->HideSurface ( "models/weapons/blaster/flare" );
 	}
+
+	*/
 }
 
 /*
