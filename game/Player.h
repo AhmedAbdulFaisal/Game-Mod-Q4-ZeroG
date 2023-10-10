@@ -124,6 +124,7 @@ enum {
 	POWERUP_HASTE,
 	POWERUP_REGENERATION,
 	POWERUP_INVISIBILITY,
+	POWERUP_FUEL,
 		
 	// ctf powerups
 	POWERUP_CTF_MARINEFLAG,
@@ -203,6 +204,7 @@ public:
 // RITUAL END
 	int						powerups;
 	int						armor;
+	int						fuel;
 	int						chaff;
 	int						flare;
 	int						maxarmor;

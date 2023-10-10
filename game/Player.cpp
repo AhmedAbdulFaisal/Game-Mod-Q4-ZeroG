@@ -4384,6 +4384,14 @@ idPlayer::StartPowerUpEffect
 void idPlayer::StartPowerUpEffect( int powerup ) {
 
 	switch( powerup ) {
+
+		case POWERUP_FUEL:{
+
+			if (inventory.fuel < inventory.maxFuel) {
+				PlayEffect("fx_regeneration", animator.GetJointHandle("chest"), true);
+			}
+			break;
+		}
 		case POWERUP_CTF_MARINEFLAG: {
 			AddClientModel( "mp_ctf_flag_pole" );
 			AddClientModel( "mp_ctf_marine_flag_world" );
