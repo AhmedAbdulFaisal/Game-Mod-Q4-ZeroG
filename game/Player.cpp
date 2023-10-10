@@ -193,6 +193,8 @@ const idVec4 marineHitscanTint( 0.69f, 1.0f, 0.4f, 1.0f );
 const idVec4 stroggHitscanTint( 1.0f, 0.5f, 0.0f, 1.0f );
 const idVec4 defaultHitscanTint( 0.4f, 1.0f, 0.4f, 1.0f );
 
+
+
 /*
 ==============
 idInventory::Clear
@@ -206,6 +208,11 @@ void idInventory::Clear( void ) {
 	armor				= 0;
 	maxarmor			= 0;
 	secretAreasDiscovered = 0;
+
+	maxFuel				= 0;
+	fuel				= 0;
+	chaff				= 0;
+	flare				= 0;
 
 	memset( ammo, 0, sizeof( ammo ) );
 
@@ -4389,6 +4396,7 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 
 			if (inventory.fuel < inventory.maxFuel) {
 				PlayEffect("fx_regeneration", animator.GetJointHandle("chest"), true);
+				inventory.fuel+=25;
 			}
 			break;
 		}
