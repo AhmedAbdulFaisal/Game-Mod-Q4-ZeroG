@@ -483,6 +483,8 @@ rvWeaponBlaster::State_Flashlight
 ================
 */
 stateResult_t rvWeaponBlaster::State_Flashlight ( const stateParms_t& parms ) {
+	/* 
+	
 	enum {
 		FLASHLIGHT_INIT,
 		FLASHLIGHT_WAIT,
@@ -509,4 +511,8 @@ stateResult_t rvWeaponBlaster::State_Flashlight ( const stateParms_t& parms ) {
 			return SRESULT_DONE;
 	}
 	return SRESULT_ERROR;
+
+	*/
+
+	return SRESULT_DONE;
 }

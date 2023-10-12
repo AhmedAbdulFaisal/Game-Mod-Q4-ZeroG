@@ -316,6 +316,8 @@ rvWeaponMachinegun::State_Flashlight
 ================
 */
 stateResult_t rvWeaponMachinegun::State_Flashlight ( const stateParms_t& parms ) {
+
+	/* 
 	enum {
 		FLASHLIGHT_INIT,
 		FLASHLIGHT_WAIT,
@@ -341,5 +343,7 @@ stateResult_t rvWeaponMachinegun::State_Flashlight ( const stateParms_t& parms )
 			SetState ( "Idle", 4 );
 			return SRESULT_DONE;
 	}
-	return SRESULT_ERROR;
+
+	*/
+	return SRESULT_DONE;
 }
