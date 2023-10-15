@@ -124,7 +124,6 @@ enum {
 	POWERUP_HASTE,
 	POWERUP_REGENERATION,
 	POWERUP_INVISIBILITY,
-	POWERUP_FUEL,
 		
 	// ctf powerups
 	POWERUP_CTF_MARINEFLAG,
@@ -199,6 +198,8 @@ public:
 	int						fuel;
 	int						chaff;
 	int						flare;
+	int						chaff_takeaway = 15;
+	int						flare_takeaway = 15;
 
 	int						maxHealth;
 	int						weapons;

@@ -4392,14 +4392,7 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 
 	switch( powerup ) {
 
-		case POWERUP_FUEL:{
-
-			if (inventory.fuel < inventory.maxFuel) {
-				PlayEffect("fx_regeneration", animator.GetJointHandle("chest"), true);
-				inventory.fuel+=25;
-			}
-			break;
-		}
+		
 		case POWERUP_CTF_MARINEFLAG: {
 			AddClientModel( "mp_ctf_flag_pole" );
 			AddClientModel( "mp_ctf_marine_flag_world" );
@@ -4465,19 +4458,34 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 			break;
 		}
 
-		case POWERUP_HASTE: {
-			powerUpOverlay = hasteOverlay;
+		/* haste replaced with fuel powerup */
 
-			hasteEffect = PlayEffect( "fx_haste", GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), true );
+		case POWERUP_HASTE: {
+
+			/* maxFuel is supposed to be 100 */
+			if (inventory.fuel < inventory.maxFuel) {
+				PlayEffect("fx_regeneration", animator.GetJointHandle("chest"), true);
+				inventory.fuel += 25;
+			}
+
+			powerUpOverlay = regenerationOverlay;
+
+			//hasteEffect = PlayEffect( "fx_haste", GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), true );
 			break;
 		}
 		
+		/* Dispense Flares */
+
 		case POWERUP_INVISIBILITY: {
 			powerUpOverlay = invisibilityOverlay;
+
 
 			powerUpSkin = declManager->FindSkin( spawnArgs.GetString( "skin_invisibility" ), false );
 			break;
 		}
+
+
+		/* Dispense Chaff */
 
 		case POWERUP_GUARD: {
 			if ( arenaEffect != NULL ) {
