@@ -724,6 +724,7 @@ public:
 	void					BloodSplat( const idEntity* ent, const idVec3 &origin, const idVec3 &dir, float size, const char *material );
 // RAVEN END
 
+
 	void					CallFrameCommand( idEntity *ent, const function_t *frameCommand );
 // RAVEN BEGIN
 // bdube: added script object frame commands
@@ -1189,10 +1190,12 @@ public:
 #define	MASK_MONSTERCLIP			(CONTENTS_SOLID|CONTENTS_MONSTERCLIP)
 // RAVEN END
 
-const float DEFAULT_GRAVITY			= 1066.0f;
+/* Here we change the gravity because fuck newton */
+
+const float DEFAULT_GRAVITY			= 10.0f; //originally 1066.0f
 const float DEFAULT_GRAVITY_MP		= 800.0f;
 
-#define DEFAULT_GRAVITY_STRING		"1066"
+#define DEFAULT_GRAVITY_STRING		"10" //originally 1066
 #define DEFAULT_MP_GRAVITY_STRING	"800"
 const idVec3 DEFAULT_GRAVITY_VEC3( 0, 0, -DEFAULT_GRAVITY );
 

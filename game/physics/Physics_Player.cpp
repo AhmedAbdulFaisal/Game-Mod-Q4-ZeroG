@@ -605,7 +605,7 @@ void idPhysics_Player::FlyMove( void ) {
 	float	wishspeed;
 	idVec3	wishdir;
 	float	scale;
-
+	gameLocal.Printf("flyMove\n");
 	// normal slowdown
 	idPhysics_Player::Friction();
 
@@ -1293,6 +1293,7 @@ bool idPhysics_Player::CheckJump( void ) {
 	walking = false;
 	current.movementFlags |= PMF_JUMP_HELD | PMF_JUMPED;
 
+	
 	addVelocity = 2.0f * maxJumpHeight * -gravityVector;
 	addVelocity *= idMath::Sqrt( addVelocity.Normalize() );
 	current.velocity += addVelocity;

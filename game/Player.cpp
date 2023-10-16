@@ -9069,7 +9069,6 @@ void idPlayer::Move( void ) {
 		pfl.onGround	= physicsObj.HasGroundContacts();
 		pfl.onLadder	= physicsObj.OnLadder();
 		pfl.jump		= physicsObj.HasJumped();
-
  		// check if we're standing on top of a monster and give a push if we are
  		idEntity *groundEnt = physicsObj.GetGroundEntity();
 // RAVEN BEGIN
@@ -9089,6 +9088,9 @@ void idPlayer::Move( void ) {
  		}
 	}
 
+	//gameLocal.Printf("tick\n");
+
+	/* Jump code??? (nah) */
 	if ( pfl.jump ) {
 		loggedAccel_t	*acc = &loggedAccel[currentLoggedAccel&(NUM_LOGGED_ACCELS-1)];
 		currentLoggedAccel++;
