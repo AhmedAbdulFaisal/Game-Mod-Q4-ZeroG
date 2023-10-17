@@ -9087,12 +9087,14 @@ void idPlayer::Move( void ) {
  			physicsObj.SetLinearVelocity( vel );
  		}
 	}
+	
 
-	//gameLocal.Printf("tick\n");
-
-	/* Jump code??? (nah) */
+	/* Jump code??? (does nothing) */
 	if ( pfl.jump ) {
 		loggedAccel_t	*acc = &loggedAccel[currentLoggedAccel&(NUM_LOGGED_ACCELS-1)];
+		
+		
+		
 		currentLoggedAccel++;
 		acc->time = gameLocal.time;
 		acc->dir[2] = 200;

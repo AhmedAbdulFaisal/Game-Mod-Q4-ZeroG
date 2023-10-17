@@ -605,7 +605,6 @@ void idPhysics_Player::FlyMove( void ) {
 	float	wishspeed;
 	idVec3	wishdir;
 	float	scale;
-	gameLocal.Printf("flyMove\n");
 	// normal slowdown
 	idPhysics_Player::Friction();
 
@@ -1143,6 +1142,7 @@ Sets clip model size
 void idPhysics_Player::CheckDuck( void ) {
 	trace_t	trace;
 	idVec3 end;
+	idVec3 decVelocity;
 	idBounds bounds;
 	float maxZ;
 
@@ -1153,15 +1153,22 @@ void idPhysics_Player::CheckDuck( void ) {
 		if ( command.upmove < 0 && !ladder ) {
 			// duck
 			current.movementFlags |= PMF_DUCKED;
+
+			/* Hack to duck n shiiiet*/
+
 		} else {
 			// stand up if possible
 			if ( current.movementFlags & PMF_DUCKED ) {
 				// try to stand up
 				end = current.origin - ( pm_normalheight.GetFloat() - pm_crouchheight.GetFloat() ) * gravityNormal;
-// RAVEN BEGIN
-// ddynerman: multiple clip worlds
-				gameLocal.Translation( self, trace, current.origin, end, clipModel, clipModel->GetAxis(), clipMask, self );
+// RAVEN BEGIN ddynerman: multiple clip worlds	   
 // RAVEN END
+
+				decVelocity = -50.0f * maxJumpHeight * -gravityVector;
+				decVelocity *= idMath::Sqrt(decVelocity.Normalize());
+				current.velocity += decVelocity;
+				gameLocal.Translation(self, trace, current.origin, end, clipModel, clipModel->GetAxis(), clipMask, self);
+
 				if ( trace.fraction >= 1.0f ) {
 					current.movementFlags &= ~PMF_DUCKED;
 				}
@@ -1279,12 +1286,12 @@ bool idPhysics_Player::CheckJump( void ) {
 		return false;
 	}
 
-	// must wait for jump to be released
+	//must wait for jump to be released
 	if ( current.movementFlags & PMF_JUMP_HELD ) {
 		return false;
 	}
 
-	// don't jump if we can't stand up
+	//don't jump if we can't stand up
 	if ( current.movementFlags & PMF_DUCKED ) {
 		return false;
 	}
@@ -1294,7 +1301,8 @@ bool idPhysics_Player::CheckJump( void ) {
 	current.movementFlags |= PMF_JUMP_HELD | PMF_JUMPED;
 
 	
-	addVelocity = 2.0f * maxJumpHeight * -gravityVector;
+	//hack to amplify jump speed
+	addVelocity = 50.0f * maxJumpHeight * -gravityVector;
 	addVelocity *= idMath::Sqrt( addVelocity.Normalize() );
 	current.velocity += addVelocity;
 

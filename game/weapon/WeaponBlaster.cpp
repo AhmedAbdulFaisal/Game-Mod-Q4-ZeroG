@@ -95,7 +95,7 @@ rvWeaponBlaster::Flashlight
 /* Flashlight disabled */
 void rvWeaponBlaster::Flashlight ( bool on ) {
 	
-	/*
+	
 	owner->Flashlight ( on );
 	
 
@@ -107,7 +107,7 @@ void rvWeaponBlaster::Flashlight ( bool on ) {
 		viewModel->HideSurface ( "models/weapons/blaster/flare" );
 	}
 
-	*/
+	
 }
  
 
@@ -452,11 +452,11 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 
 	
 			if ( gameLocal.time - fireHeldTime > chargeTime ) {	
-				Attack ( true, 1, spread, 0, 1.0f );
+				Attack ( true, 10, spread, 0, 1.0f );
 				PlayEffect ( "fx_chargedflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "chargedfire", parms.blendFrames );
 			} else {
-				Attack ( false, 1, spread, 0, 1.0f );
+				Attack ( false, 10, spread, 0, 1.0f );
 				PlayEffect ( "fx_normalflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "fire", parms.blendFrames );
 			}
@@ -483,7 +483,7 @@ rvWeaponBlaster::State_Flashlight
 ================
 */
 stateResult_t rvWeaponBlaster::State_Flashlight ( const stateParms_t& parms ) {
-	/* 
+	
 	
 	enum {
 		FLASHLIGHT_INIT,
@@ -512,7 +512,7 @@ stateResult_t rvWeaponBlaster::State_Flashlight ( const stateParms_t& parms ) {
 	}
 	return SRESULT_ERROR;
 
-	*/
+	
 
 	return SRESULT_DONE;
 }
