@@ -699,6 +699,18 @@ void idPhysics_Player::WalkMove( void ) {
 
 	if ( idPhysics_Player::CheckJump() ) {
 		// jumped away
+		gameLocal.Printf("jumping\n");
+
+		/*
+		if (idPhysics_Player::CheckJump()) {
+			gameLocal.Printf("jumping again\n");
+			return;
+		}
+		else {
+			gameLocal.Printf("not jumping again\n");
+		}
+
+		*/
 		if ( waterLevel > WATERLEVEL_FEET ) {
 			idPhysics_Player::WaterMove();
 		}
@@ -1461,7 +1473,7 @@ void idPhysics_Player::MovePlayer( int msec ) {
 	c_pmove++;
 
 	walking = false;
-	groundPlane = false;
+	groundPlane = true;
 	ladder = false;
 
 	// determine the time
@@ -1575,6 +1587,7 @@ void idPhysics_Player::MovePlayer( int msec ) {
 	else if ( walking ) {
 		// walking on ground
 		idPhysics_Player::WalkMove();
+		//idPhysics_Player::AirMove();
 	}
 	else {
 		// airborne
