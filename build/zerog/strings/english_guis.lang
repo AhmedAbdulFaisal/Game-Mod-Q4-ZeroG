@@ -1019,12 +1019,12 @@
 	"#str_201029"	"Volume"
 	"#str_201030"	"Mic Input Volume"
 	
-	"#str_201031"	"AN ID SOFTWARE GAME"
-	"#str_201032"	"DEVELOPED BY"
-	"#str_201033"	"RAVEN SOFTWARE"
-	"#str_201034"	"PUBLISHED BY"
-	"#str_201035"	"ACTIVISION"
-	"#str_201036"	"PRESENTS"
+	"#str_201031"	"ZEROG: A Zero Gravity Quake Mod (Not inspired by Descent)"
+	"#str_201032"	"Made for IT Game Mod Development by Ahmed Faisal"
+	"#str_201033"	"You can Jump in zero-g with [SPACE], while Crouching [C] allows you to descend"
+	"#str_201034"	"Collect fuel to jump and descend in space"
+	"#str_201035"	"The blaster pushes you towards where you're pointing"
+	"#str_201036"	"The Machine Gun pushes you away from where you're pointing."
 	
 	"#str_201037"	"Warning: Your sound card does not support OpenAL."
 }
