@@ -677,6 +677,43 @@ void idPhysics_Player::AirMove( void ) {
 	idPhysics_Player::SlideMove( true, gameLocal.isMultiplayer, false, false );
 }
 
+
+/* 
+* It is much easier to implement fuel controls within physics player, I can probably just send a variable change over within physicsObj and do whatever idk
+* I hate quake 4 code
+
+void idPhysics_Player::FuelManage(void) {
+
+
+	//add fuel
+
+	if (inventory.fuel > 0 || inventory.fuel < 100) {
+		if (physicsObj.HasJumped()) {
+
+			inventory.fuel -= 15;
+			//gameLocal.Printf("Removing Fuel \n");
+		}
+		if (physicsObj.IsCrouching()) {
+			inventory.fuel -= 5;
+		}
+	}
+
+	//cap fuel from 0 to 100
+	if (inventory.fuel < 0) {
+		//gameLocal.Printf("Out of Fuel \n");
+		inventory.fuel = 0;
+	}
+	else if (inventory.fuel > 100) {
+		//gameLocal.Printf("Capped Fuel \n");
+		inventory.fuel = 100;
+	}
+
+	//gameLocal.Printf("Inventory Fuel: %d\n ", inventory.fuel);
+
+}
+
+*/
+
 /*
 ===================
 idPhysics_Player::WalkMove
@@ -691,34 +728,41 @@ void idPhysics_Player::WalkMove( void ) {
 	idVec3		oldVelocity, vel;
 	float		oldVel, newVel;
 
+	//idPlayer* player;
+	//player = gameLocal.GetLocalPlayer();
+	//int fuel = player->inventory.fuel;
+
 	if ( waterLevel > WATERLEVEL_WAIST && ( viewForward * groundTrace.c.normal ) > 0.0f ) {
 		// begin swimming
 		idPhysics_Player::WaterMove();
 		return;
 	}
 
-	if ( idPhysics_Player::CheckJump() ) {
-		// jumped away
-		gameLocal.Printf("jumping\n");
+	//gameLocal.Printf("inventory fuel: %d\n",fuel);
 
+	if (idPhysics_Player::CheckJump()) {
+			jumping = true; //momentarily enable jumping, then decrease fuel
 		/*
 		if (idPhysics_Player::CheckJump()) {
-			gameLocal.Printf("jumping again\n");
+			//gameLocal.Printf("jumping again\n");
 			return;
+		}else {
+			//gameLocal.Printf("not jumping again\n");
 		}
-		else {
-			gameLocal.Printf("not jumping again\n");
-		}
-
 		*/
-		if ( waterLevel > WATERLEVEL_FEET ) {
+		if (waterLevel > WATERLEVEL_FEET) {
 			idPhysics_Player::WaterMove();
 		}
+
 		else {
 			idPhysics_Player::AirMove();
 		}
 		return;
 	}
+	else {
+		jumping = false;
+	}
+	
 
 	idPhysics_Player::Friction();
 

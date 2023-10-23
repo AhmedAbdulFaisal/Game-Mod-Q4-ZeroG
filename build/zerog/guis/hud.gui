@@ -2135,7 +2135,7 @@ windowDef Desktop
 		}
 
 	}
-	windowDef p_ammo_test
+	windowDef p_fuel
 	{
 		rect	0,0,640,480
 		visible	("gui::mp" == 0 )
@@ -2155,66 +2155,27 @@ windowDef Desktop
 			matcolor	0.701,0.815,0.431,0.2
 			shear	0,-.22
 		}
-		windowDef p_ammo_val1
+		windowDef fuel
 		{
-			rect	133,8,115,59
+			rect	27,20,64,32
 			visible	1
-			shear	0,-.22
-			windowDef ammo_val1
-			{
-				rect	-119,0,125,59
-				visible	1
-				background	"gfx/guis/hud/valbar"
-				matcolor	0.701,0.815,0.431,0.35
-				shear	0,-.22
-			}
-		}
-		windowDef current_gun1
-		{
-			rect	11,23,106,26
-			visible	"desktop::showGunInfo" != 0
-			background	"gui::weapicon"
-			matcolor	0.780,0.741,0.470,0.4
-		}
-		windowDef ammo_amount1
-		{
-			rect	44,17,49,26
-			visible	1
-			forecolor	0.866,0.921,0.764,1
-			text	"gui::player_ammo"
+			forecolor	0.839,0.894,0.737,1
+			text	"gui::player_fuel"
 			textscale	0.5
 			font	"fonts/chain"
 			shear	0,-.22
 			textalign	2
 		}
-		windowDef total_ammo1
+		windowDef fuelheader
 		{
-			rect	91,20,40,18
+			rect	97,44,32,16
 			visible	1
-			forecolor	0.866,0.921,0.764,1
-			text	"gui::player_totalammo"
-			textscale	0.32
+			forecolor	0.835,0.890,0.733,1
+			text	"fuel"
+			textscale	0.3
 			font	"fonts/chain"
 			shear	0,-.22
 			textalign	2
-		}
-		windowDef ammo_amount_nc1
-		{
-			rect	82,17,49,26
-			visible	0
-			forecolor	0.866,0.921,0.764,1
-			text	"gui::player_totalammo"
-			textscale	0.5
-			font	"fonts/chain"
-			shear	0,-.22
-			textalign	2
-		}
-		windowDef icon_ammoweapon1
-		{
-			rect	113,46,16,16
-			visible	1
-			background	"gui::ammoicon"
-			matcolor	0.658,0.639,0.376,0.6
 		}
 	}
 }

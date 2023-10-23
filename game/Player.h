@@ -195,7 +195,7 @@ const int	ASYNC_PLAYER_TOURNEY_STATUS_BITS = idMath::BitsForInteger( PTS_NUM_STA
 class idInventory {
 public:
 	int						maxFuel;
-	int						fuel;
+	int						fuel = 100;
 	int						chaff;
 	int						flare;
 	int						chaff_takeaway = 15;
@@ -596,7 +596,7 @@ public:
 	void					ScheduleWeaponSwitch		(int weapon);
 #endif
 //RAVEN BEGIN
-
+	void					FuelManage					( void );
 	void					Reload						( void );
 	void					NextWeapon					( void );
 	void					NextBestWeapon				( void );

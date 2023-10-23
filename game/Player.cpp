@@ -210,7 +210,7 @@ void idInventory::Clear( void ) {
 	secretAreasDiscovered = 0;
 
 	maxFuel				= 0;
-	fuel				= 0;
+	fuel				= 100;
 	chaff				= 0;
 	flare				= 0;
 
@@ -1512,6 +1512,8 @@ void idPlayer::Init( void ) {
 
 	oldButtons				= 0;
 	oldFlags				= 0;
+
+	inventory.fuel = 100;
 
 	currentWeapon			= -1;
 	idealWeapon				= -1;
@@ -3414,7 +3416,16 @@ void idPlayer::UpdateHudStats( idUserInterface *_hud ) {
 		_hud->SetStateFloat	( "player_armorpct", idMath::ClampFloat ( 0.0f, 1.0f, (float)inventory.armor / (float)inventory.maxarmor ) );
 		_hud->HandleNamedEvent ( "updateArmor" );
 	}
+
+	//ui->SetStateString("player_fuel", va("%i%%", inventory.fuel));
+
+	temp = _hud->State().GetInt("player_fuel", "-1");
+	if (temp != inventory.fuel) {
+		_hud->SetStateString("player_fuel", va("%i%%", inventory.fuel));
+	}
 	
+	
+
 	// Boss bar
 	if ( _hud->State().GetInt ( "boss_health", "-1" ) != (bossEnemy ? bossEnemy->health : -1) ) {
 		if ( !bossEnemy || bossEnemy->health <= 0 ) {
@@ -4307,6 +4318,7 @@ float idPlayer::PowerUpModifier( int type ) {
 
 	if ( PowerUpActive( POWERUP_HASTE ) ) {
 		switch ( type ) {
+			/* 
 			case PMOD_SPEED:	
 				mod *= 1.3f;
 				break;
@@ -4314,6 +4326,7 @@ float idPlayer::PowerUpModifier( int type ) {
 			case PMOD_FIRERATE:
 				mod *= 0.7f;
 				break;
+			*/
 		}
 	}
 
@@ -4461,12 +4474,11 @@ void idPlayer::StartPowerUpEffect( int powerup ) {
 		/* haste replaced with fuel powerup */
 
 		case POWERUP_HASTE: {
-
 			/* maxFuel is supposed to be 100 */
-			if (inventory.fuel < inventory.maxFuel) {
-				PlayEffect("fx_regeneration", animator.GetJointHandle("chest"), true);
-				inventory.fuel += 25;
-			}
+			PlayEffect("fx_regeneration", animator.GetJointHandle("chest"), true);
+			inventory.fuel += 25;
+
+			gameLocal.Printf("Refueled, you now have %d Fuel \n", inventory.fuel);
 
 			powerUpOverlay = regenerationOverlay;
 
@@ -4590,7 +4602,7 @@ void idPlayer::StopPowerUpEffect( int powerup ) {
 			break;
 		}
 		case POWERUP_HASTE: {
-			StopEffect( "fx_haste" );
+			StopEffect( "fx_regeneration" );
 			break;
 		}
 		case POWERUP_INVISIBILITY: {
@@ -7234,6 +7246,7 @@ void idPlayer::UpdateFocus( void ) {
 
 				ui->SetStateString( "player_health", va("%i", health ) );
 				ui->SetStateString( "player_armor", va( "%i%%", inventory.armor ) );
+				ui->SetStateString("player_fuel", va("%i%%", inventory.fuel));
 
 				kv = ent->spawnArgs.MatchPrefix( "gui_", NULL );
 				while ( kv ) {
@@ -9303,6 +9316,37 @@ void idPlayer::LoadDeferredModel( void ) {
 	}
 }
 
+
+void idPlayer::FuelManage(void) {
+
+	
+	//add fuel
+
+	if (inventory.fuel > 0 || inventory.fuel < 100) {
+		if (physicsObj.HasJumped()) {
+			
+			inventory.fuel -= 15;
+			//gameLocal.Printf("Removing Fuel \n");
+		}
+		if (physicsObj.IsCrouching()) {
+			inventory.fuel -= 1;
+		}
+	}
+
+	//cap fuel from 0 to 100
+	if (inventory.fuel < 0) {
+		//gameLocal.Printf("Out of Fuel \n");
+		inventory.fuel = 0;
+	}else if (inventory.fuel > 100) {
+		//gameLocal.Printf("Capped Fuel \n");
+		inventory.fuel = 100;
+	}
+
+	//gameLocal.Printf("Inventory Fuel: %d\n ", inventory.fuel);
+	
+}
+
+
 /*
 ==============
 idPlayer::Think
@@ -9426,6 +9470,8 @@ void idPlayer::Think( void ) {
 		usercmd.upmove = 0;
 	}
 	
+	FuelManage();
+
 	// zooming
 	bool zoom = (usercmd.buttons & BUTTON_ZOOM) && CanZoom();
 	if ( zoom != zoomed ) {
@@ -9532,8 +9578,14 @@ void idPlayer::Think( void ) {
 	}
 // RAVEN END
 
-	Move();
-
+	if (inventory.fuel > 0) {
+		Move();
+	}
+	else {
+		//gameLocal.Printf("Sorry, Out of Fuel! \n");
+		/* Run physics because it looks unnatural to have the player just stop in mid air (lmao) */
+		RunPhysics();
+	}
 	if ( !g_stopTime.GetBool() ) {
  		if ( !noclip && !spectating && ( health > 0 ) && !IsHidden() ) {
  			TouchTriggers();

@@ -79,6 +79,11 @@ public:
 	bool					OnLadder( void ) const;
 	const idVec3 &			PlayerGetOrigin( void ) const;	// != GetOrigin
 
+
+	/* Management functions, may not be used */
+	void					FuelManage(void);
+
+
 public:	// common physics interface
 	bool					Evaluate( int timeStepMSec, int endTimeMSec );
 	void					UpdateTime( int endTimeMSec );
@@ -115,6 +120,7 @@ public:	// common physics interface
 // kfuller: Added
 	bool					IsNoclip( void ) const;
 	bool					IsDead( void ) const;
+	bool					jumping = false;
 // RAVEN END
 
 	void					SetClipModelNoLink( idClipModel *clip );
@@ -155,6 +161,7 @@ private:
 	// results of last evaluate
 	waterLevel_t			waterLevel;
 	int						waterType;
+	//int						fuel = 100;
 
 private:
 	float					CmdScale( const usercmd_t &cmd ) const;
