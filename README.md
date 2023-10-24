@@ -13,6 +13,8 @@ Move down (Must be crouching): Crouch
 Both these moves take up fuel, which is shown in the top left. The player can move around vertically in the air for as long as they want until 
 they run out of fuel by doing the aforementioned actions. When the player runs out of fuel, they can't move whatsoever and must refuel themselves with haste powerups.
 
+The player can additionally push themselves with guns, though this feature is bugged. 
+
 Besides the main deliverable, the mod has other features, such as:
 
 * An aforementioned HUD meter showing fuel
