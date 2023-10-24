@@ -458,6 +458,10 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 				Attack ( false, 10, spread, 0, 1.0f );
 				PlayEffect ( "fx_normalflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "fire", parms.blendFrames );
+				
+				//ADD PHYSICS CODE HERE
+				player->GetPlayerPhysics()->ApplyImpulse(player->GetInstance(), player->GetPlayerPhysics()->GetOrigin(), player->GetEyePosition());
+				//player->GetPlayerPhysics()->AddForce(player->GetInstance(),player->GetPlayerPhysics()->GetOrigin(), player->GetEyePosition());
 			}
 			fireHeldTime = 0;
 			

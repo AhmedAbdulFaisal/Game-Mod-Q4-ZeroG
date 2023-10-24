@@ -238,6 +238,9 @@ rvWeaponMachinegun::State_Fire
 ================
 */
 stateResult_t rvWeaponMachinegun::State_Fire ( const stateParms_t& parms ) {
+	idPlayer* player;
+	player = gameLocal.GetLocalPlayer();
+	
 	enum {
 		STAGE_INIT,
 		STAGE_WAIT,
@@ -249,6 +252,9 @@ stateResult_t rvWeaponMachinegun::State_Fire ( const stateParms_t& parms ) {
 				Attack ( true, 1, spreadZoom, 0, 1.0f );
 				fireHeld = true;
 			} else {
+
+
+				player->GetPlayerPhysics()->ApplyImpulse(player->GetInstance(), player->GetPlayerPhysics()->GetOrigin(), player->GetEyePosition());
 				nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 				Attack ( false, 1, spread, 0, 1.0f );
 			}
