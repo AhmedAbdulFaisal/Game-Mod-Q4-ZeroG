@@ -8,6 +8,7 @@ Gameplay:
 Moving in Zero G is done by two commands:
 
 Move up (Must be on the ground): Spacebar
+
 Move down (Must be crouching): Crouch
 
 Both these moves take up fuel, which is shown in the top left. The player can move around vertically in the air for as long as they want until 
